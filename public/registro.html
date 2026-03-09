@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registro</title>
+</head>
+
+<body>
+
+<h2>Crear cuenta</h2>
+
+<input id="usuario" placeholder="Usuario">
+
+<input id="password" type="password" placeholder="Contraseña">
+
+<button onclick="registrar()">Registrarse</button>
+
+<script>
+
+async function registrar(){
+
+await fetch("/registro",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+usuario:usuario.value,
+password:password.value
+})
+
+})
+
+alert("Usuario creado")
+
+}
+
+</script>
+
+</body>
+</html>
