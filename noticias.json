@@ -1,0 +1,79 @@
+[
+  {
+    "titulo": "Bienvenidos a la sección de noticias",
+    "contenido": "Aquí se publicarán novedades de artesanos, productores y emprendedores de la región.",
+    "autor": "Administrador",
+    "fecha": "2026-03-09"
+  }
+]
+<section class="noticias">
+  <h2>📰 Noticias Locales</h2>
+  <div id="lista-noticias"></div>
+</section>
+.noticias{
+margin-top:40px;
+padding:20px;
+background:#f4f4f4;
+border-radius:10px;
+}
+
+.noticia{
+background:white;
+padding:15px;
+margin-bottom:15px;
+border-radius:10px;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.noticia h3{
+margin:0;
+color:#2c3e50;
+}
+
+.noticia p{
+margin-top:10px;
+}
+async function cargarNoticias() {
+  const respuesta = await fetch("noticias.json");
+  const noticias = await respuesta.json();
+
+  const contenedor = document.getElementById("lista-noticias");
+  contenedor.innerHTML = "";
+
+  noticias.reverse().forEach(noticia => {
+    const div = document.createElement("div");
+    div.className = "noticia";
+
+    div.innerHTML = `
+      <h3>${noticia.titulo}</h3>
+      <p>${noticia.contenido}</p>
+      <small>Publicado por ${noticia.autor} - ${noticia.fecha}</small>
+    `;
+
+    contenedor.appendChild(div);
+  });
+}
+
+cargarNoticias();
+<h2>Publicar Noticia</h2>
+
+<input type="text" id="titulo" placeholder="Título de la noticia">
+
+<textarea id="contenido" placeholder="Contenido"></textarea>
+
+<button onclick="publicarNoticia()">Publicar</button>
+function publicarNoticia(){
+
+let titulo = document.getElementById("titulo").value;
+let contenido = document.getElementById("contenido").value;
+
+let noticia = {
+titulo: titulo,
+contenido: contenido,
+autor: "Administrador",
+fecha: new Date().toISOString().split("T")[0]
+};
+
+alert("Noticia publicada correctamente");
+
+}
