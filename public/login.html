@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+</head>
+
+<body>
+
+<h2>Iniciar sesión</h2>
+
+<input id="usuario" placeholder="Usuario">
+
+<input id="password" type="password" placeholder="Contraseña">
+
+<button onclick="login()">Entrar</button>
+
+<script>
+
+async function login(){
+
+const res = await fetch("/login",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+usuario:usuario.value,
+password:password.value
+})
+
+})
+
+const data = await res.json()
+
+if(data.login){
+
+alert("Bienvenido")
+
+}else{
+
+alert("Usuario incorrecto")
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
